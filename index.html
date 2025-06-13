@@ -32,7 +32,18 @@
         name: "Blog",
         // 侧边栏文档目录
         loadSidebar: true,
-    
+        onlyCover: true,         // 仅加载封面（首页）
+        // 添加懒加载属性到所有链接
+        markdown: {
+          renderer: {
+            link: function(href, title, text) {
+              if (href.endsWith('.md') && href !== 'README.md') {
+                return `<a href="${href}" data-load="none">${text}</a>`;
+              }
+              return `<a href="${href}">${text}</a>`;
+            }
+          }
+        },
         alias: {
           "/.*/_sidebar.md": "/_sidebar.md",
         },
